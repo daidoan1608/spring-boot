@@ -3,13 +3,13 @@ package com.vti.blogapp.service;
 import com.vti.blogapp.dto.CommentDto;
 import com.vti.blogapp.form.CommentCreateForm;
 import com.vti.blogapp.form.CommentUpdateForm;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface CommentService {
-    List<CommentDto> findAll();
+    Page<CommentDto> findAll(Pageable pageable);
 
-    List<CommentDto> findByPostId(Long postId);
+    Page<CommentDto> findByPostId(Long postId, Pageable pageable);
 
     CommentDto findById(Long id);
 
@@ -18,4 +18,6 @@ public interface CommentService {
     CommentDto update(Long id, CommentUpdateForm form);
 
     void delete(Long id);
+
+    void deleteByEmail(String email);
 }

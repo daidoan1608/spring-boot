@@ -1,16 +1,17 @@
 package com.vti.blogapp.service;
 
 import com.vti.blogapp.dto.CommentDto;
-import com.vti.blogapp.entity.Comment;
 import com.vti.blogapp.form.CommentCreateForm;
 import com.vti.blogapp.form.CommentUpdateForm;
 import com.vti.blogapp.mapper.CommentMapper;
 import com.vti.blogapp.repository.CommentRepository;
 import com.vti.blogapp.repository.PostRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,19 +21,15 @@ public class CommentServiceIpl implements CommentService{
     private PostRepository postRepository;
 
     @Override
-    public List<CommentDto> findAll() {
-        var comments = commentRepository.findAll();
-        var dtos = new ArrayList<CommentDto>();
-        for(Comment comment : comments) {
-            var dto = CommentMapper.map(comment);
-            dtos.add(dto);
-        }
-        return dtos;
+    public Page<CommentDto> findAll(Pageable pageable) {
+        return commentRepository.findAll(pageable)
+                .map(CommentMapper::map);
     }
 
     @Override
-    public List<CommentDto> findByPostId(Long postId) {
-        return List.of();
+    public Page<CommentDto> findByPostId(Long postId, Pageable pageable) {
+        return commentRepository.findByPostId(postId, pageable)
+                .map(CommentMapper::map);
     }
 
     @Override
@@ -70,5 +67,11 @@ public class CommentServiceIpl implements CommentService{
     @Override
     public void delete(Long id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByEmail(String email) {
+        commentRepository.deleteByEmail(email);
     }
 }

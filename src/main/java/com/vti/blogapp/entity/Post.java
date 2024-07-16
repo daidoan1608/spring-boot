@@ -1,5 +1,6 @@
 package com.vti.blogapp.entity;
 
+import com.vti.blogapp.converter.PostStatusConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,11 @@ public class Post {
     @Column(name = "description", length = 100, nullable = false)
     private String description;
 
+    @Column(name = "status", nullable = false)
+    //@Enumerated(value = EnumType.STRING)
+    @Convert(converter = PostStatusConverter.class)
+    private Status status;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -38,4 +44,8 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
+
+    public enum Status {
+        OPENING, CLOSING
+    }
 }
