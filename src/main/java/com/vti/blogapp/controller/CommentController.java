@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class CommentController {
     }
 
     @GetMapping("/api/v1/comments/{id}")
-    public CommentDto findById(@PathVariable("id") Long id) {
+    public CommentDto findById(@PathVariable("id") UUID id) {
         return commentService.findById(id);
     }
 
@@ -44,14 +45,14 @@ public class CommentController {
 
     @PutMapping("/api/v1/comments/{id}")
     public CommentDto update(
-            @PathVariable("id") Long id,
+            @PathVariable("id") UUID id,
             @RequestBody CommentUpdateForm form
     ) {
         return commentService.update(id, form);
     }
 
     @DeleteMapping("/api/v1/comments/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
+    public void deleteById(@PathVariable("id") UUID id) {
         commentService.delete(id);
     }
 
