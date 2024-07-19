@@ -34,7 +34,7 @@ public class CommentServiceIpl implements CommentService{
     }
 
     @Override
-    public CommentDto findById(UUID id) {
+    public CommentDto findById(String id) {
         return commentRepository.findById(id)
                 .map(CommentMapper::map)
                 .orElse(null);
@@ -54,7 +54,7 @@ public class CommentServiceIpl implements CommentService{
     }
 
     @Override
-    public CommentDto update(UUID id, CommentUpdateForm form) {
+    public CommentDto update(String id, CommentUpdateForm form) {
         var optional = commentRepository.findById(id);
         if (optional.isEmpty()) {
             return null;
@@ -66,7 +66,7 @@ public class CommentServiceIpl implements CommentService{
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(String id) {
         commentRepository.deleteById(id);
     }
 

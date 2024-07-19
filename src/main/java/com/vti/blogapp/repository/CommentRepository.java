@@ -12,10 +12,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.UUID;
 
 public interface CommentRepository extends
-        JpaRepository<Comment, UUID> {
+        JpaRepository<Comment, String> {
     //Method name
     Page<Comment> findByPostId(Long postId, Pageable pageable);
-
 
     //Query methods
     @Query("DELETE FROM Comment WHERE email = :email")
