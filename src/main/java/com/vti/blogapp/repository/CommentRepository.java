@@ -9,8 +9,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.UUID;
+
 public interface CommentRepository extends
-        JpaRepository<Comment, Long> {
+        JpaRepository<Comment, UUID> {
     //Method name
     Page<Comment> findByPostId(Long postId, Pageable pageable);
 
