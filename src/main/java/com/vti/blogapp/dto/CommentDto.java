@@ -15,9 +15,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Getter
 @Setter
 public class CommentDto extends RepresentationModel<CommentDto> {
-    private Comment.PrimaryKey pk;
+    Comment.PrimaryKey pk;
     private String body;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
 }

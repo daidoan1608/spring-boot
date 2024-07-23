@@ -13,9 +13,15 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "comment")
+@IdClass(Comment.PrimaryKey.class)
 public class Comment {
-    @EmbeddedId
-    private PrimaryKey pk;
+    @Id
+    @Column(name = "name", length = 50, nullable = false)
+    private String name;
+
+    @Id
+    @Column(name = "email", length = 75, nullable = false)
+    private String email;
 
     @Column(name = "body", length = 100, nullable = false)
     private String body;
@@ -33,6 +39,7 @@ public class Comment {
     private Post post;
 
     @Setter
+    @Getter
     @Embeddable
     public static class PrimaryKey implements Serializable {
         @Column(name = "name", length = 50, nullable = false)

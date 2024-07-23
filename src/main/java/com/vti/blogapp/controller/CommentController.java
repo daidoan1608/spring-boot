@@ -34,7 +34,7 @@ public class CommentController {
     }
 
     @PostMapping("/api/v1/posts/{postId}/comments")
-    public CommentDto comment(
+    public CommentDto create(
             @PathVariable("postId") Long postId,
             @RequestBody CommentCreateForm form
     ) {
