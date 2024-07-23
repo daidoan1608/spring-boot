@@ -10,19 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface CommentRepository extends
-        JpaRepository<Comment, Long> {
+        JpaRepository<Comment, Comment.PrimaryKey> {
     //Method name
     Page<Comment> findByPostId(Long postId, Pageable pageable);
 
-
-    //Query methods
-    @Query("DELETE FROM Comment WHERE email = :email")
-    @Modifying
-    void deleteByEmail(@Param("email") String email);
-
-    @Query("DELETE FROM Comment WHERE name = ?1 AND email = ?2")
-    void deleteByName(String name, String email);
-
-    @Query(value = "SELECT *", nativeQuery = true)
-    Page<CommentDto> findByIdGreaterThan(Long id, Pageable pageable);
 }

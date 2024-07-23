@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
@@ -13,16 +14,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "comment")
 public class Comment {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "name", length = 50, nullable = false)
-    private String name;
-
-    @Column(name = "email", length = 75, nullable = false)
-    private String email;
+    @EmbeddedId
+    private PrimaryKey pk;
 
     @Column(name = "body", length = 100, nullable = false)
     private String body;
@@ -38,4 +31,15 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
+
+    @Setter
+    @Embeddable
+    public static class PrimaryKey implements Serializable {
+        @Column(name = "name", length = 50, nullable = false)
+        private String name;
+
+        @Column(name = "email", length = 75, nullable = false)
+        private String email;
+
+    }
 }
