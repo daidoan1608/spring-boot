@@ -11,7 +11,7 @@ public class PostMapper {
         post.setTitle(form.getTitle());
         post.setContent(form.getContent());
         post.setDescription(form.getDescription());
-        post.setStatus(form.getStatus());
+        post.setStatus(Post.Status.valueOf(form.getStatus()));
         return post;
     }
 
@@ -31,6 +31,6 @@ public class PostMapper {
         post.setTitle(form.getTitle());
         post.setContent(form.getContent());
         post.setDescription(form.getDescription());
-        post.setStatus(form.getStatus());
+        post.setStatus(Post.Status.valueOf(form.getStatus()));
     }
 }

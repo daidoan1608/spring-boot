@@ -5,11 +5,16 @@ import com.vti.blogapp.form.CommentCreateForm;
 import com.vti.blogapp.form.CommentFilterForm;
 import com.vti.blogapp.form.CommentUpdateForm;
 import com.vti.blogapp.service.CommentService;
+import com.vti.blogapp.validation.CommentIdExists;
+import com.vti.blogapp.validation.PostIdExists;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Validated
 @RestController
 @AllArgsConstructor
 public class CommentController {
@@ -24,30 +29,30 @@ public class CommentController {
     }
 
     @GetMapping("/api/v1/comments/{id}")
-    public CommentDto findById(@PathVariable("id") Long id) {
+    public CommentDto findById(@CommentIdExists @PathVariable("id") Long id) {
         return commentService.findById(id);
     }
 
     @GetMapping("/api/v1/posts/{postId}/comments")
     public Page<CommentDto> findByPostId(
-            @PathVariable("postId") Long postId,
+            @PostIdExists @PathVariable("postId") Long postId,
             Pageable pageable
     ) {
         return commentService.findByPostId(postId, pageable);
     }
 
     @PostMapping("/api/v1/posts/{postId}/comments")
-    public CommentDto comment(
-            @PathVariable("postId") Long postId,
-            @RequestBody CommentCreateForm form
+    public CommentDto create(
+            @PostIdExists @PathVariable("postId") Long postId,
+            @Valid @RequestBody CommentCreateForm form
     ) {
         return commentService.create(postId, form);
     }
 
     @PutMapping("/api/v1/comments/{id}")
     public CommentDto update(
-            @PathVariable("id") Long id,
-            @RequestBody CommentUpdateForm form
+            @CommentIdExists @PathVariable("id") Long id,
+            @Valid @RequestBody CommentUpdateForm form
     ) {
         return commentService.update(id, form);
     }
