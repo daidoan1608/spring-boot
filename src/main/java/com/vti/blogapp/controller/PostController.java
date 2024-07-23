@@ -2,6 +2,7 @@ package com.vti.blogapp.controller;
 
 import com.vti.blogapp.dto.PostDto;
 import com.vti.blogapp.form.PostCreateForm;
+import com.vti.blogapp.form.PostFilterForm;
 import com.vti.blogapp.form.PostUpdateForm;
 import com.vti.blogapp.service.PostService;
 import lombok.AllArgsConstructor;
@@ -15,12 +16,14 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("/api/v1/posts")
-    public Page<PostDto> findAll(Pageable pageable) {
-        return postService.findAll(pageable);
+    public Page<PostDto> findAll(
+            PostFilterForm form,
+            Pageable pageable) {
+        return postService.findAll(form, pageable);
     }
 
     @GetMapping("/api/v1/posts/{id}")
-    public PostDto findById(@PathVariable("id")Long id) {
+    public PostDto findById(@PathVariable("id") Long id) {
         return postService.findById(id);
     }
 
@@ -31,14 +34,14 @@ public class PostController {
 
     @PutMapping("/api/v1/posts/{id}")
     public PostDto update(
-            @PathVariable("id")Long id,
+            @PathVariable("id") Long id,
             @RequestBody PostUpdateForm form
     ) {
         return postService.update(id, form);
     }
 
     @DeleteMapping("/api/v1/posts/{id}")
-    public void deleteById(@PathVariable("id")Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         postService.deleteById(id);
     }
 }

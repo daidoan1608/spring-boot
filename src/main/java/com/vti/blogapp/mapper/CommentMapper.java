@@ -23,7 +23,7 @@ public class CommentMapper {
         dto.setBody(comment.getBody());
         dto.setCreatedAt(comment.getCreatedAt());
         dto.setUpdatedAt(comment.getUpdatedAt());
-        return dto;
+        return dto.withSelfRel();
     }
 
     public static void map(CommentUpdateForm form, Comment comment) {
