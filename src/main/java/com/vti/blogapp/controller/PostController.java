@@ -18,7 +18,8 @@ public class PostController {
     @GetMapping("/api/v1/posts")
     public Page<PostDto> findAll(
             PostFilterForm form,
-            Pageable pageable) {
+            Pageable pageable
+    ) {
         return postService.findAll(form, pageable);
     }
 
