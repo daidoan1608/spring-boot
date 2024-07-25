@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class PostServiceIpl implements PostService{
+public class PostServiceImpl implements PostService{
     private PostRepository postRepository;
 
     @Override

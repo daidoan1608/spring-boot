@@ -14,11 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
-public class CommentServiceIpl implements CommentService{
+public class CommentServiceImpl implements CommentService{
     private CommentRepository commentRepository;
     private PostRepository postRepository;
 
