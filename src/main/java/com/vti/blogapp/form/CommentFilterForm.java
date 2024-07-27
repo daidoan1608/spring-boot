@@ -1,6 +1,5 @@
 package com.vti.blogapp.form;
 
-import com.vti.blogapp.entity.Post;
 import lombok.Getter;
 import lombok.Setter;
 

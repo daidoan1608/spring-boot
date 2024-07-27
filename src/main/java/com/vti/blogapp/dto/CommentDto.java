@@ -1,7 +1,6 @@
 package com.vti.blogapp.dto;
 
 import com.vti.blogapp.controller.CommentController;
-import com.vti.blogapp.controller.PostController;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;

@@ -1,9 +1,7 @@
 package com.vti.blogapp.specification;
 
 import com.vti.blogapp.entity.Comment;
-import com.vti.blogapp.entity.Post;
 import com.vti.blogapp.form.CommentFilterForm;
-import com.vti.blogapp.form.PostFilterForm;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;

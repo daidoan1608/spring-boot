@@ -1,6 +1,5 @@
 package com.vti.blogapp.form;
 
-import com.vti.blogapp.entity.Post;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
